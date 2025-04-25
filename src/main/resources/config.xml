@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		https://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -32,7 +33,7 @@
     </bean>
 
     <bean id="thingTwo" class="thing.ThingTwo">
-        <constructor-arg name="mass" value="23"></constructor-arg>
+        <constructor-arg name="mass" value="false"></constructor-arg>
     </bean>
 
     <bean id="thingThree" class="thing.ThingThree">
@@ -40,4 +41,60 @@
         <property name="thingTwo" ref="thingTwo"></property>
     </bean>
 
+    <!-- p-namespace Eaxmple-->
+    <bean id="cat_p" class="Cat"
+        p:name ="P03"
+        p:age = "2"
+    />
+
+    <!-- configure a java.util.Properties instance-->
+     <bean id="propertiesWrapper" class="others.PropertiesWrapper" >
+        <property name="properties">
+            <value>
+                cat.called=cat_name
+                driver.name=drivername
+            </value>
+        </property>
+
+     </bean>
+
+     <!-- Inner Bean-->
+     <bean id="thingThree_1" class="thing.ThingThree">
+        <constructor-arg index="0" >
+            <bean id = "thingOne" class="thing.ThingOne">
+                <property name="size" value="32"></property>
+            </bean>
+        </constructor-arg>
+        <property name="thingTwo" ref="thingTwo"></property>
+    </bean>
+
+    <!-- Collections -->
+    <bean id="moreComplexObject" class="others.ClassWithCollections">
+        <!-- results in a setAdminEmails(java.util.Properties) call -->
+        <property name="adminEmails">
+            <props>
+                <prop key="administrator">administrator@example.org</prop>
+                <prop key="support">support@example.org</prop>
+                <prop key="development">development@example.org</prop>
+            </props>
+        </property>
+        <!-- results in a setSomeList(java.util.List) call -->
+        <property name="someList">
+            <list>
+                <value>a list element followed by a reference</value>
+            </list>
+        </property>
+        <!-- results in a setSomeMap(java.util.Map) call -->
+        <property name="someMap">
+            <map>
+                <entry key="an entry" value="just some string"/>
+            </map>
+        </property>
+        <!-- results in a setSomeSet(java.util.Set) call -->
+        <property name="someSet">
+            <set>
+                <value>just some string</value>
+            </set>
+        </property>
+    </bean>
 </beans>

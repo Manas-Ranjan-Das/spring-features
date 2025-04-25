@@ -1,8 +1,8 @@
 package thing;
 
 public class ThingTwo {
-    int mass ;
-    public ThingTwo(int mass) {
+    boolean mass ;
+    public ThingTwo(boolean mass) {
         this.mass = mass;
     }
 }
