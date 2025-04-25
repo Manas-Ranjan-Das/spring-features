@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Property Based Instanciation-->
+    <bean id="cat1" class="Cat" name = "caterinaCatBean caterinaCat" >
+         <property name="name" value="Caterina"></property>
+         <property name="age" value="13"></property>
+    </bean>
+    <alias name="caterinaCatBean" alias="cat2233" />
+	
+    <!-- Static Factory Method Based -->
+    <bean id = "factory-cat" class="CatFactory" factory-method="makeCat">
+        <constructor-arg name="name" value="Catousky" ></constructor-arg>
+        <constructor-arg name="age" value="23"></constructor-arg>
+    </bean>
+
+    <!-- Instance factory Based-->
+    <bean id="catFactory" class="CatFactory">
+        <constructor-arg name="age" value="3"></constructor-arg>
+    </bean>
+
+    <bean id="instanceFactoryCat" factory-bean="catFactory" factory-method="makeCat">
+        <constructor-arg name="name" value="Instaousky"></constructor-arg>
+    </bean>
+
+    <!-- Dependency Injection-->
+    <bean id = "thingOne" class="thing.ThingOne">
+        <property name="size" value="12"></property>
+    </bean>
+
+    <bean id="thingTwo" class="thing.ThingTwo">
+        <constructor-arg name="mass" value="23"></constructor-arg>
+    </bean>
+
+    <bean id="thingThree" class="thing.ThingThree">
+        <constructor-arg index="0" ref="thingOne"></constructor-arg>
+        <property name="thingTwo" ref="thingTwo"></property>
+    </bean>
+
+</beans>
