@@ -200,3 +200,26 @@ This form is preferable to the second, because using the idref tag lets the cont
 	</property>
 </bean>
 ```
+### Null and Empty String
+Empty String
+```xml
+<bean class="ExampleBean">
+	<property name="email" value=""/>
+</bean>
+```
+Null Value
+```xml
+<bean class="ExampleBean">
+	<property name="email">
+		<null/>
+	</property>
+</bean>
+```
+### Compund Property
+```xml
+<bean id="something" class="things.ThingOne">
+	<property name="fred.bob.sammy" value="123" />
+</bean>
+```
+The `something` bean has a `fred` property, which has a `bob` property, which has a `sammy` property, and that final `sammy` property is being set to a value of 123. In order for this to work, the fred property of something and the bob property of fred must not be null after the bean is constructed. Otherwise, a NullPointerException is thrown.
+

@@ -97,4 +97,22 @@
             </set>
         </property>
     </bean>
+
+    <bean id="lazy-bean" lazy-init="true" class="lazy.LazyBean">
+        <property name="desc" value="lazy bean"></property>
+    </bean>
+
+    <bean id="not-lazy-bean" class="lazy.NotLazyBean">
+        <property name="desc" value="not lazy bean"></property>
+    </bean>
+
+    <bean id="prototypeOne" class="methodinjection.PrototypeOne" scope="prototype">
+
+    </bean>
+    <bean id="singletonOne" class="methodinjection.SingletonOne" >
+        <lookup-method name="getPrototypeOne" bean="prototypeOne" />
+    </bean>
+    
+
+
 </beans>
